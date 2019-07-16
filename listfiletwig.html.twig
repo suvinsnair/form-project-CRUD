@@ -1,0 +1,137 @@
+<style>
+table, th, td {
+  border-collapse: collapse;
+  border: 1.5px solid black ;
+  margin: 0 auto;
+  width:800px;
+}
+</style>
+   <table>
+ <tr>
+     
+      <th>Employee id</th>
+      <th>Emp name</th>
+      <th>Emp talent</th>
+      <th>Action</th>
+  
+ </tr>
+      
+      
+  {% for user in post %}
+ 
+ <tr>
+  <td>{{user.employeeId}}</td>
+  <td>{{user.empName}}</td>
+  <td>{{user.empTalent}}</td>
+  <td> &thinsp; <input type="button" id="btn-edit" value="Edit" data-id="{{user.id}}" class="btn btn-success btnedit"/> &thinsp;&thinsp;&thinsp;<input type="button" id="btn-del" value="Delete" data-id="{{user.id}}" class="btn btn-success btndelete"/></td>
+  
+ </tr>
+ 
+  {% endfor %}
+ 
+   </table>
+  
+  <script>
+  $('.btnedit').on('click', function(){
+          var empId = $(this).attr('data-id');
+          $("#edit_val").text(empId);
+          
+          
+          
+          $.ajax({
+              
+              url:'{{path('employee_edit')}}',
+              type:"POST",
+              dataType:"json",
+              data:{data:empId},
+              success:function(data){  
+                  var result=$.parseJSON(data);
+                  
+                  var empoyee_id=result[0];
+                  var empoyee_name=result[1];
+                  var empoyee_talent=result[2];
+                  $("#edit_empoyeeid").val(empoyee_id);
+                  $("#edit_empname").val(empoyee_name);
+                  $("#edit_emptal").val(empoyee_talent);    
+              },    
+              error:function(data){
+                  
+                  alert("There is an errors");               
+                  
+              }
+              
+             
+              
+              
+              
+              
+          });//call for ajaax
+      });
+      
+      
+      
+  $('#update').on('click', function(){
+  var empId = $("#edit_val").text();
+  var new_name=$("#edit_empname").val();
+  var new_talent=$("#edit_emptal").val();
+ 
+  
+  
+  
+        $.ajax({
+            
+            url:'{{path('employee_new')}}',
+            type:"POST",
+            data:{data1:empId, data2:new_name, data3:new_talent},
+            success:function(data){
+                
+                
+                
+                $("#list_changer").html(data);
+   
+                
+            },
+    
+            error:function(data){
+                
+                
+            }
+        });
+  
+        
+        
+    });//call for double click
+    
+  $(".btndelete").on('click', function(){
+  
+  
+  var empdel = $(this).attr('data-id');
+  alert(empdel);
+  
+  $.ajax({
+      
+      url:'{{path('employee_delete')}}',
+      type:"POST",
+      data:{data:empdel},
+      success:function(data){
+          alert("deleted");
+          
+          $("#list_changer").html(data);
+          
+          
+      },
+      error:function(data){
+        
+      }
+      
+        });
+  
+       
+        
+        
+    });
+    
+    
+  
+  </script>
+  

@@ -1,0 +1,119 @@
+<h2 style="width:700px; margin:0 auto;">Welcome to the Save Employee Forum</h2>
+
+<br/>
+<br/>
+
+
+{% block body %}
+    
+<div style="width:600px; margin:0 auto;">
+{{ form_start(form, {'attr': {'id': 'form1'}}) }}
+   {{ form_row(form.employeeId,{ 'id': 'edit_empoyeeid'}) }}
+   <br/>
+   
+   {{ form_row(form.empName ,{ 'id': 'edit_empname'}) }}
+   <br/>
+   {{ form_row(form.empTalent,{ 'id': 'edit_emptal'})}}
+   <br/>
+
+</div> 
+  
+           <div id="edit_val"   style="display:none;">
+                 </div>
+   <div style="width:400px; margin:0 auto;">
+   <input type="button" id="submit" value="Register" >
+   <input type="button" id="update" value="Update" >
+   {{ form_end(form) }}
+
+   </div>
+   
+   
+   <div style="width:400px; margin:0 auto;">
+   
+   
+   </div>
+   
+   
+   
+   
+   <br/>
+   <br/>
+   <br/>
+   
+
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+     <script>
+  
+
+   
+        
+     
+     </script>
+   
+
+   
+
+{% endblock %}
+
+
+{#{% block content %}
+
+
+{% for user in product %}
+        <th>Id<li>{{ user.id}}</li></th>
+        <th>EMPLOYEE ID <li>{{ user.employeeId}}</li></th>
+        <th>NAME<li>{{ user.empName}}</li></th>
+        <th>EMPLYEE"S GRADE<li>{{ user.empTalent}}</li></th>
+
+
+
+
+
+{% endfor %}
+
+  <input type="number" id="del_numb">
+  <br/>
+  <br/>
+
+  <button id="delete_btn"> Delete a Particular Entry</button>
+  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+   <script>
+       
+       
+    $(document).ready(function(){
+        
+        
+       
+       $(document).on('click', '#delete_btn', function(ev){
+           
+           
+            
+           
+           $.ajax({
+               url:'{{(path('employee_delete'))}}',
+               type:"POST",
+               data:{data:$('#del_numb').val()},
+               success:function()
+               {
+                   
+                   
+                   alert("success");
+                   
+                   
+                }
+               
+               
+               
+           });
+       });
+    });
+       
+       
+       </script>
+{%endblock%}
+
+#}

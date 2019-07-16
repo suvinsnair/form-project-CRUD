@@ -1,0 +1,62 @@
+   
+       
+       {% block body %}
+
+       
+       
+       
+    {% include "EmployeeBundle:Default:showoff.html.twig" %}
+    
+    <div id="list_changer">
+    {% include "EmployeeBundle:Default:listfiletwig.html.twig" %}
+    
+    </div>
+  <script>
+      
+      
+      
+      
+      
+      $(document).on('click',"#submit", function(ev){
+
+      if(($('#edit_empoyeeid').val()=='') || ($('#edit_empname').val()=='') || ($('#edit_emptal').val()=='')){
+
+         alert("Please Input the Fields");
+
+      }
+
+
+      else{
+
+          $.ajax({
+             url:'{{ (path('employee_save'))}}',
+             type:"POST",
+             data:$("#form1").serialize(),
+             async:true,
+             success:function(data){
+                 
+                 
+
+             $("#list_changer").html(data);
+             
+             
+            
+
+             },
+             error:function(data){
+                 alert("Another Employee with the same ID exists");
+             }   
+      });
+      }
+
+
+});
+
+  </script>
+  
+         
+   
+  
+  
+  
+  {% endblock %}
