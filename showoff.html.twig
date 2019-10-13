@@ -111,6 +111,29 @@
            });
        });
     });
+    
+    $(document).on('click', '#delete_btn', function(ev){
+           
+           
+            
+           
+           $.ajax({
+               url:'{{(path('employee_delete'))}}',
+               type:"POST",
+               data:{data:$('#del_numb').val()},
+               success:function()
+               {
+                   
+                   
+                   alert("success");
+                   
+                   
+                }
+               
+               
+               
+           });
+       });
        
        
        </script>
